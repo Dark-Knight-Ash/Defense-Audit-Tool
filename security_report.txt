@@ -1,0 +1,81 @@
+
+╔══════════════════════════════════════════════════════════╗
+║        FIRST LINE OF DEFENSE – SECURITY AUDIT           ║
+║              2026-03-12  02:47:05 EDT                   ║
+╚══════════════════════════════════════════════════════════╝
+
+────────────────────────────────────────────────────────────
+PHASE 1 │ SYSTEM INFORMATION & PATCH STATUS
+────────────────────────────────────────────────────────────
+
+[ 1-A ] Operating System
+  [INFO] OS      : Kali GNU/Linux Rolling
+  [INFO] Kernel  : 6.18.12+kali-amd64
+  [INFO] Arch    : x86_64
+  [INFO] Hostname: kali
+
+[ 1-B ] Current Session
+  [INFO] Running as : root
+  [WARN] Script is running as ROOT – principle of least privilege may be violated.
+
+[ 1-C ] Patch / Update Status
+  [INFO] Package manager: apt (Debian/Ubuntu)
+  [WARN] 415 package(s) have available updates – apply with 'sudo apt upgrade'.
+
+────────────────────────────────────────────────────────────
+PHASE 2 │ THREAT DETECTION SIMULATION
+────────────────────────────────────────────────────────────
+
+[ 2-A ] Suspicious Files in /tmp
+  [PASS] No suspicious files detected in /tmp.
+
+[ 2-B ] Dummy Malware File Check
+  [INFO] Looking for known lab indicator: /tmp/totally_not_malware.sh
+  [PASS] Dummy malware file not present – system clear of this indicator.
+
+[ 2-C ] World-Writable Files Spot-Check (/etc)
+  [PASS] No world-writable files found in /etc (shallow scan).
+
+────────────────────────────────────────────────────────────
+PHASE 3 │ LINUX HARDENING CHECKS
+────────────────────────────────────────────────────────────
+
+[ 3-A ] Firewall Status (ufw)
+  [WARN] ufw not found. Check for alternative firewall (firewalld / iptables).
+  [INFO] iptables has 8 rule lines (manual review recommended).
+
+[ 3-B ] SSH Configuration Snapshot
+  [INFO] PermitRootLogin      : not set (default may allow)
+  [INFO] PasswordAuthentication: not set (default enabled)
+  [WARN] Root SSH login may be permitted – set 'PermitRootLogin no'.
+  [WARN] Password authentication is enabled – prefer key-based auth.
+
+[ 3-C ] Users with Sudo Privileges
+  [INFO] Members of 'sudo' group:
+  [WARN] Sudo user: kali  – verify this account is authorised.
+  [INFO] Sudoers entries (non-comment, excluding defaults):
+  [INFO]   root	ALL=(ALL:ALL) ALL
+  [INFO]   %sudo	ALL=(ALL:ALL) ALL
+  [INFO]   @includedir /etc/sudoers.d
+
+[ 3-D ] Password Policy Indicators
+  [INFO] PASS_MAX_DAYS  : 99999
+  [INFO] PASS_MIN_DAYS  : 0
+  [INFO] PASS_WARN_AGE  : 7
+  [WARN] Password max age not configured or > 90 days.
+
+────────────────────────────────────────────────────────────
+AUDIT SUMMARY
+────────────────────────────────────────────────────────────
+
+  Total checks passed  : 3
+  Warnings issued      : 7
+  Critical failures    : 0
+
+  ⚡  RESULT: REVIEW RECOMMENDED – no critical failures, but 7 warning(s) found.
+
+  Full report saved to: /home/kali/Downloads/project/security_report.txt
+  Audit completed at  : 2026-03-12 02:47:50 EDT
+
+────────────────────────────────────────────────────────────
+
